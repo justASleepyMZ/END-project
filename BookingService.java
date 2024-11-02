@@ -1,20 +1,18 @@
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+package main;
 
 public class BookingService {
-    private List<Booking> bookings = new ArrayList<>();
+    private static BookingService instance;
 
-    public boolean bookRoom(Room room, User user, Date checkIn, Date checkOut) {
-        if (room != null && room.getRate() > 0) {
-            Booking booking = new Booking(room, user, checkIn, checkOut);
-            bookings.add(booking);
-            return true;
+    private BookingService() {}
+
+    public static BookingService getInstance() {
+        if (instance == null) {
+            instance = new BookingService();
         }
-        return false;
+        return instance;
     }
 
-    public List<Booking> getBookings() {
-        return bookings;
+    public void book(String roomType, String user) {
+        System.out.println("Booking " + roomType + " room for user: " + user);
     }
 }
